@@ -9,8 +9,8 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
     MAIL_SERVER = os.environ.get('MAIL_SERVER') or 'smtp.163.com'
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'spchenguanghui@163.com'
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')or '9010037317asd'
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or '*********@163.com'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')or '********'
 
     #文件上传
     MAX_CONTENT_LENGTH = 8*1024*1024
