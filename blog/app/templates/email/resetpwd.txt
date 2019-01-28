@@ -1,0 +1,2 @@
+ Hello {{ username }}
+ 点击右边链接以完成密码重置，{{ url_for('user.resetpwd', token=token, _external=True) }}

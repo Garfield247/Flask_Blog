@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+
+{% block title %}用户详情{% endblock %}
+
+{% block page_content %}
+    <h2>用户详细信息</h2>
+    <b>头像</b><br />
+    {% if img_url %}
+        <img src="{{ img_url }}" style="width: 128px; height: 128px;" />
+    {% endif %}
+    <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" class="form-control" id="username" value="{{ current_user.username }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="email">邮箱</label>
+        <input type="text" class="form-control" id="email" value="{{ current_user.email }}" readonly>
+    </div>
+{% endblock %}

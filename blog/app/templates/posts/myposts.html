@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+
+{% from 'common/macro.html' import show_pagination %}
+
+{% block title %}首页{% endblock %}
+
+{% block page_content %}
+
+    {# 遍历展示帖子 #}
+    {% for p in posts %}
+        <hr />
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" src="{{ url_for('static', filename='upload/'+p.user.icon) }}" alt="头像" style="height: 64px; width: 64px;">
+                </a>
+            </div>
+            <div class="media-body">
+                <div style="float: right;">{{ moment(p.timestamp).fromNow() }}</div>
+                <h4 class="media-heading">{{ p.user.username }}</h4>
+                {{ p.content }}
+                {# 收藏功能 #}
+            </div>
+        </div>
+    {% endfor %}
+    <hr />
+    {{ show_pagination(pagination, 'posts.myposts', uid=1) }}
+{% endblock %}

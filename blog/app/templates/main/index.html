@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+
+{% from 'common/macro.html' import show_pagination %}
+
+{% block title %}首页{% endblock %}
+
+{% block page_content %}
+    {{ wtf.quick_form(form) }}
+
+    {# 遍历展示帖子 #}
+    {% for p in posts %}
+        <hr />
+        <div class="media">
+            <div class="media-left">
+                <a href="{{ url_for('posts.myposts',uid=p.user.id) }}">
+                    <img class="media-object" src="{{ url_for('static', filename='upload/'+p.user.icon) }}" alt="头像" style="height: 64px; width: 64px;">
+                </a>
+            </div>
+            <div class="media-body">
+                <div style="float: right;">{{ moment(p.timestamp).fromNow() }}</div>
+                <h4 class="media-heading">{{ p.user.username }}</h4>
+                {{ p.content }}
+                {# 收藏功能 #}
+            {% if current_user.is_authenticated %}
+                <div url="{{ url_for('posts.collect', pid=p.id) }}" style="cursor: pointer;" class="collect">{% if current_user.is_favorite(p.id) %}取消收藏{% else %}收藏{% endif %}</div>
+            {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    <hr />
+    {# 分页构造url时的额外参数 #}
+    {{ show_pagination(pagination, 'main.index', xxx='yyy') }}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        $(function () {
+            $('.collect').click(function () {
+                _this = this
+                $.get($(this).attr('url'), function () {
+                    if ($(_this).text() == '收藏') {
+                        $(_this).text('取消收藏')
+                    } else {
+                        $(_this).text('收藏')
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

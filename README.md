@@ -1,39 +1,99 @@
-# Flask项目
+# 说明书册
 
-### 项目需求
+## 项目结构说明
 
-1. 用户注册、登录、激活
-2. 用户信息管理
-3. 博客发表、回复
-4. 博客展示、分页展示
-5. 收藏博客
-6. 搜索、点赞、统计、排序、...
-
-### 目录结构
+```json
+├── blog
+│   ├── app
+│   │   ├── config.py //配置文件
+│   │   ├── email.py //邮件发送
+│   │   ├── extensions.py //项目初始化脚本
+│   │   ├── forms //Flask-wtf表单
+│   │   │   ├── __init__.py
+│   │   │   ├── posts.py
+│   │   │   └── user.py
+│   │   ├── __init__.py
+│   │   ├── models //数据库模型
+│   │   │   ├── __init__.py
+│   │   │   ├── posts.py
+│   │   │   └── user.py
+│   │   ├── static //静态文件
+│   │   │   ├── css
+│   │   │   ├── img
+│   │   │   │   └── tear.jpg
+│   │   │   ├── js
+│   │   │   ├── upload
+│   │   │   │   ├── default.jpg
+│   │   │   └── weibo.ico
+│   │   ├── templates  //模板文件
+│   │   │   ├── common
+│   │   │   │   ├── base.html
+│   │   │   │   └── macro.html
+│   │   │   ├── email
+│   │   │   │   ├── activate.html
+│   │   │   │   ├── activate.txt
+│   │   │   │   ├── changemail.html
+│   │   │   │   ├── changemail.txt
+│   │   │   │   ├── resetpwd.html
+│   │   │   │   └── resetpwd.txt
+│   │   │   ├── errors
+│   │   │   │   └── 404.html
+│   │   │   ├── main
+│   │   │   │   └── index.html
+│   │   │   ├── posts
+│   │   │   │   └── myposts.html
+│   │   │   └── user
+│   │   │       ├── changemail.html
+│   │   │       ├── changepassword.html
+│   │   │       ├── findbackpwd.html
+│   │   │       ├── icon.html
+│   │   │       ├── login.html
+│   │   │       ├── profile.html
+│   │   │       ├── register.html
+│   │   │       └── resetpwd.html
+│   │   └── views  //视图函数
+│   │       ├── __init__.py
+│   │       ├── main.py
+│   │       ├── posts.py
+│   │       └── user.py
+│   ├── manage.py //项目管理文件
+│   ├── migrations  //数据迁移文件
+│   ├── requirement.txt  //依赖包list
+│   └── test //测试监本目录
+└── README.md
 
 ```
-project/
-	app/					# 整个程序的包目录
-		static/					# 静态资源文件
-			js/						# JS脚本
-			css/					# 样式表
-			img/					# 图片
-			favicon.ico				 # 网站图标
-		templates/				# 模板文件
-			common/					# 通用模板
-			errors/					# 错误页面
-			user/					# 用户模板
-			posts/					# 帖子模板
-			email/					# 邮件发送
-		views/					# 视图文件
-		models/					# 数据模型
-		forms/					# 表单文件
-		config.py				# 配置文件
-		email.py				# 邮件发送
-		extensions.py			# 各种扩展
-	migrations/				# 数据库迁移目录
-	tests/					# 测试单元
-	.env/					# 虚拟环境
-	requirements.txt		# 依赖包的列表
-	manage.py				# 项目启动控制文件
+
+
+
+## 数据库迁移（初次运行项目要先进行数据库迁移）
+
+以上三步完成mondel定义的表结构向数据库的迁移。并且会在项目下生成migrations/目录，保存数据库每次变更的内容。
+
+1. 创建数据库表
+
+   ```shell
+   python manage.py db init
+   ```
+
+2. 提交修改
+
+   ```
+   python manage.py db migrate
+   ```
+
+3. 执行修改
+
+   ```
+   python manage.py db upgrage
+   ```
+
+**注：**若变更数据库则删除migrations目录，重新进行迁移
+
+## 启动
+
+```shell
+# 在manage.py的目录下
+python manage.py runserver 
 ```
+
