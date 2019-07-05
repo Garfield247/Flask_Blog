@@ -29,7 +29,7 @@ class TestingConfig(Config):
                                                               'blog-test.sqlite')
 
 #生产环境
-class PrductionConfig(Config):
+class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(base_dir,
                                                           'blog.sqlite')
 #配置字典
