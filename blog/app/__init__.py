@@ -12,7 +12,7 @@ def create_app(config_name):
     config[config_name].init_app(app)
     #配置扩展
     config_extensions(app)
-    #
+    #配置蓝本
     config_blueprint(app)
     #错误页面定制
     config_errorhandler(app)
